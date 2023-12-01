@@ -1,0 +1,42 @@
+document.body.innerHTML = `
+  <div id="mensaje" style="font-size: 24px; text-align: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+    ¿Me quieres?
+  </div>
+  <div id="respuesta" style="text-align: center; position: absolute; top: 70%; left: 50%; transform: translate(-50%, -50%);">
+    <button onclick="responder('si')" style="font-size: 18px; background-color: #FFD1DC;">Sí</button>
+    <button id="botonNo" onclick="moverBoton()" style="font-size: 18px; background-color: #ADD8E6;">No</button>
+  </div>
+`;
+
+document.body.style.backgroundImage = "url('https://i.ibb.co/ZT7pLPG/background-image.jpg')";
+document.body.style.backgroundSize = "cover";
+document.body.style.backgroundPosition = "center";
+document.body.style.backgroundRepeat = "no-repeat";
+
+function responder(opcion) {
+  if (opcion === 'si') {
+    alert('Yo también, caballo homosexual de las montañas');
+  }
+}
+
+function moverBoton() {
+  var botonNo = document.getElementById("botonNo");
+  var areaMovimiento = document.getElementById("respuesta");
+  var distanciaMinima = 100;
+
+  var nuevaPosX = Math.random() * (areaMovimiento.clientWidth - botonNo.clientWidth);
+  var nuevaPosY = Math.random() * (areaMovimiento.clientHeight - botonNo.clientHeight);
+
+  if (
+    Math.abs(nuevaPosX - areaMovimiento.clientWidth / 2) < distanciaMinima &&
+    Math.abs(nuevaPosY - areaMovimiento.clientHeight / 2) < distanciaMinima
+  ) {
+    nuevaPosX += (Math.random() < 0.5 ? -1 : 1) * distanciaMinima;
+    nuevaPosY += (Math.random() < 0.5 ? -1 : 1) * distanciaMinima;
+  }
+
+
+  botonNo.style.position = 'absolute';
+  botonNo.style.left = nuevaPosX + 'px';
+  botonNo.style.top = nuevaPosY + 'px';
+}
